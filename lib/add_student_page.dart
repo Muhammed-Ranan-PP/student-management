@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'models/student_model.dart';
+import 'package:hive/hive.dart';
 
 class AddStudentPage extends StatefulWidget {
   const AddStudentPage({super.key});
@@ -15,14 +16,13 @@ class _AddStudentPageState extends State<AddStudentPage> {
   final addressController = TextEditingController();
   @override
   void dispose() {
-    // TODO: implement dispose
     nameController.dispose();
     ageController.dispose();
     classController.dispose();
     addressController.dispose();
     super.dispose();
- 
   }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -53,13 +53,23 @@ class _AddStudentPageState extends State<AddStudentPage> {
             decoration: InputDecoration(hintText: "Address"),
             controller: addressController,
           ),
-          ElevatedButton(onPressed: () {
-            Student student = Student(profileImage: "default", name: nameController.text, age:  int.parse(ageController.text), studentClass: classController.text, address: addressController.text);
-          }, child: Text("SAVE STUDENT")),
-          
+          ElevatedButton(
+            onPressed: () {    
+              Student student = Student(
+                profileImage: "default",
+                name: nameController.text,
+                age: int.parse(ageController.text),
+                studentClass: classController.text,
+                address: addressController.text,
+              );
+              var box = Hive.box<Student>("students");
+              box.add(student);
+              Navigator.pop(context);
+            },
+            child: Text("SAVE STUDENT"),
+          ),
         ],
       ),
-      
     );
   }
 }

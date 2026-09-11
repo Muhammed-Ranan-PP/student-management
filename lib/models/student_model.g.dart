@@ -17,27 +17,24 @@ class StudentAdapter extends TypeAdapter<Student> {
       for (int i = 0; i < numOfFields; i++) reader.readByte(): reader.read(),
     };
     return Student(
-      profileImage: fields[0] as String,
-      name: fields[1] as String,
-      age: (fields[2] as num).toInt(),
-      studentClass: fields[3] as String,
-      address: fields[4] as String,
+      name: fields[0] as String,
+      age: (fields[1] as num).toInt(),
+      studentClass: fields[2] as String,
+      address: fields[3] as String,
     );
   }
 
   @override
   void write(BinaryWriter writer, Student obj) {
     writer
-      ..writeByte(5)
-      ..writeByte(0)
-      ..write(obj.profileImage)
-      ..writeByte(1)
-      ..write(obj.name)
-      ..writeByte(2)
-      ..write(obj.age)
-      ..writeByte(3)
-      ..write(obj.studentClass)
       ..writeByte(4)
+      ..writeByte(0)
+      ..write(obj.name)
+      ..writeByte(1)
+      ..write(obj.age)
+      ..writeByte(2)
+      ..write(obj.studentClass)
+      ..writeByte(3)
       ..write(obj.address);
   }
 

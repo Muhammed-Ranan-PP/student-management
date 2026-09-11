@@ -56,7 +56,7 @@ class _AddStudentPageState extends State<AddStudentPage> {
           ElevatedButton(
             onPressed: () {    
               Student student = Student(
-                profileImage: "default",
+               
                 name: nameController.text,
                 age: int.parse(ageController.text),
                 studentClass: classController.text,

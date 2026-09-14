@@ -14,6 +14,9 @@ class StudentListPage extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         centerTitle: true,
+         iconTheme: IconThemeData(
+          color:Colors.white
+        ),
         backgroundColor: Colors.black,
         title: Text(
           style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold),

@@ -29,46 +29,60 @@ class _AddStudentPageState extends State<AddStudentPage> {
       appBar: AppBar(
         centerTitle: true,
         backgroundColor: Colors.black,
+         iconTheme: IconThemeData(
+          color:Colors.white
+        ),
         title: Text(
           style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
           "ADD STUDENT",
         ),
       ),
-      body: Column(
-        children: [
-          CircleAvatar(child: Icon(Icons.person)),
-          TextField(
-            decoration: InputDecoration(hintText: "Student Name"),
-            controller: nameController,
-          ),
-          TextField(
-            decoration: InputDecoration(hintText: "AGE"),
-            controller: ageController,
-          ),
-          TextField(
-            decoration: InputDecoration(hintText: "Student Class"),
-            controller: classController,
-          ),
-          TextField(
-            decoration: InputDecoration(hintText: "Address"),
-            controller: addressController,
-          ),
-          ElevatedButton(
-            onPressed: () {    
-              Student student = Student(
-               
-                name: nameController.text,
-                age: int.parse(ageController.text),
-                studentClass: classController.text,
-                address: addressController.text,
-              );
-              var box = Hive.box<Student>("students");
-              box.add(student);
-              Navigator.pop(context);
-            },
-            child: Text("SAVE STUDENT"),
-          ),
-        ],
+      body: Padding(
+        padding: const EdgeInsets.all(8.0),
+        child: Column(
+          children: [
+            CircleAvatar(child: Icon(Icons.person)),
+            SizedBox(
+                  height: 10.0,
+                ),
+            TextField(
+              decoration: InputDecoration(hintText: "Student Name"),
+              controller: nameController,
+            ),
+            TextField(
+              decoration: InputDecoration(hintText: "AGE"),
+              controller: ageController,
+            ),
+            TextField(
+              decoration: InputDecoration(hintText: "Student Class"),
+              controller: classController,
+            ),
+            TextField(
+              decoration: InputDecoration(hintText: "Address"),
+              controller: addressController,
+            ),
+            SizedBox(
+                  height: 10.0,
+                ),
+            ElevatedButton(
+              onPressed: () {    
+                Student student = Student(
+                 
+                  name: nameController.text,
+                  age: int.parse(ageController.text),
+                  studentClass: classController.text,
+                  address: addressController.text,
+                );
+                
+                var box = Hive.box<Student>("students");
+                box.add(student);
+                Navigator.pop(context);
+              },
+
+              child: Text("SAVE STUDENT"),
+            ),
+          ],
+        ),
       ),
     );
   }

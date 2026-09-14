@@ -11,44 +11,45 @@ class StudentDetailPage extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.black,
+        iconTheme: IconThemeData(
+          color:Colors.white
+        ),
         centerTitle: true,
         title: Text(
           "STUDENT DETAILS",
           style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
         ),
-       actions: [IconButton(onPressed: (){
-          Navigator.push(context, MaterialPageRoute(builder: (context)=>EditStudentPage(student:student),),);
-       }, icon: Icon(Icons.edit))],
+        actions: [
+          IconButton(
+            onPressed: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => EditStudentPage(student: student),
+                ),
+              );
+            },
+            icon: Icon(Icons.edit,color: Colors.white,),
+          ),
+          IconButton(onPressed: (){
+            student.delete();
+            Navigator.pop(context);
+          }, icon: Icon(Icons.delete,color: Colors.white,),),
+        ],
       ),
+      
       body: Padding(
         padding: const EdgeInsets.all(8.0),
         child: Column(
+          
           children: [
-            Row(
-              children: [
-                Text("Name : "),
-                Text(student.name),
-              ],
+            SizedBox(
+              height: 10,
             ),
-            Row(
-              children: [
-                  Text("Age : "),
-                Text(student.age.toString()),
-              ],
-            ),
-            Row(
-              children: [
-                  Text("Domain : "),
-                Text(student.studentClass),
-              ],
-            ),
-            Row(
-              children: [
-                  Text("Address : "),
-                Text(student.address),
-              ],
-            )
-        
+            Row(children: [Text("Name : "), Text(student.name)]),
+            Row(children: [Text("Age : "), Text(student.age.toString())]),
+            Row(children: [Text("Domain : "), Text(student.studentClass)]),
+            Row(children: [Text("Address : "), Text(student.address)]),
           ],
         ),
       ),
